@@ -1,6 +1,6 @@
-# JavaScript Techdegree Project #8: A SQL Library Manager
+# JavaScript Techdegree Project #9: REST API
 
-A live version of this project can be found [here](https://rliess-restapi-school.herokuapp.com/). Please note that the app is in hibernation mode and may take a couple of seconds to load.  
+A live version of this project can be found [here](). Please note that the app is in hibernation mode and may take a couple of seconds to load.  
 
 ## Installation
 
