@@ -1,0 +1,36 @@
+{
+  "name": "techdegree-fullstack-js-rest-api",
+  "version": "1.0.0",
+  "description": "A REST API with Express to administer a school database of courses and users",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon ./app.js",
+    "seed": "cross-env DB_ENABLE_LOGGING=true node './seed'"
+  },
+  "keywords": [
+    "REST",
+    "API"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rliess/js-techdegree-project9.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rliess/js-techdegree-project9/issues"
+  },
+  "author": "Reinhard Liess",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/sequelize": "^4.28.8",
+    "nodemon": "^2.0.1"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cross-env": "^5.2.1",
+    "express": "^4.17.1",
+    "morgan": "^1.9.0",
+    "promise.prototype.finally": "^3.1.1",
+    "sqlite3": "^4.1.0"
+  }
+}
