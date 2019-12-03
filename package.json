@@ -4,12 +4,15 @@
   "description": "A REST API with Express to administer a school database of courses and users",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./app.js",
+    "start": "node ./app.js",
+    "start_local": "nodemon ./app.js",
+    "debug": "nodemon --inspect ./app.js",
     "seed": "cross-env DB_ENABLE_LOGGING=true node './seed'"
   },
   "keywords": [
     "REST",
-    "API"
+    "API",
+    "Express"
   ],
   "repository": {
     "type": "git",
@@ -27,10 +30,11 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "cross-env": "^5.2.1",
+    "cross-env": "^6.0.3",
     "express": "^4.17.1",
     "morgan": "^1.9.0",
     "promise.prototype.finally": "^3.1.1",
+    "sequelize": "^5.21.2",
     "sqlite3": "^4.1.0"
   }
 }
