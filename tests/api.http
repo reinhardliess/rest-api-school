@@ -1,2 +1,13 @@
 # A collection of requests to test the REST API (to use with Visual Studio Code Rest Client extension)
 
+# Variables
+@host = http://localhost:5000/api
+@contentType = application/json
+
+# get all courses
+GET {{host}}/courses HTTP/1.1
+
+###
+
+# get a specific course
+GET {{host}}/courses/1 HTTP/1.1

@@ -1,14 +1,19 @@
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: process.env.RESTAPI_DB,
-})
+});
 
+// Central object with db info
 const db = {
   sequelize,
   Sequelize,
   models: {},
+  attrib: {
+    user: ['id', 'firstName', 'lastName', 'emailAddress'],
+    course: ['id', 'title', 'description', 'estimatedTime', 'materialsNeeded']
+  }
 }
 
 // import all models
@@ -19,6 +24,7 @@ const Course = require('./models/course')(sequelize)
 User.hasMany(Course);
 Course.belongsTo(User);
 
+// Exports
 db.models.User = User;
 db.models.Course = Course;
 

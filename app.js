@@ -10,12 +10,15 @@ const express = require('express');
 const morgan = require('morgan');
 
 // import models, database
-const db = require('./db')
-const { User, Course } = db.models;
-const { Sequelize } = db;
-const { Op } = db.Sequelize;
+// const db = require('./db')
+// const { User, Course } = db.models;
+// const { Sequelize } = db;
+// const { Op } = db.Sequelize;
 
-// console.log(process.env.RESTAPI_DB);
+// import routes
+const indexRouter = require('./routes/index');
+const userRouter = require('./routes/user');
+const courseRouter = require('./routes/course');
 
 // variable to enable global error logging
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
@@ -26,14 +29,10 @@ const app = express();
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
 
-// TODO setup your api routes here
-
-// setup a friendly greeting for the root route
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Welcome to the REST API project!',
-  });
-});
+// TODO: setup your api routes here
+app.use('/', indexRouter);
+app.use('/api/users', userRouter);
+app.use('/api/courses', courseRouter);
 
 // send 404 if no other route matched
 // TODO: add url to message
