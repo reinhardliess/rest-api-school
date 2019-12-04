@@ -2,7 +2,27 @@
 
 # Variables
 @host = http://localhost:5000/api
-@contentType = application/json
+@json = Content-Type: application/json
+@auth = Authorization: Basic joe@smith.com joepassword
+
+# get info for authenticated user
+GET {{host}}/users HTTP/1.1
+{{auth}}
+
+###
+
+# create new user
+POST {{host}}/users HTTP/1.1
+{{json}}
+
+{
+  "firstName": "Lara",
+  "lastName": "Croft",
+  "emailAddress": "lara@croftmanor.co.uk",
+  "password": "jaffacakes214"
+}
+
+###
 
 # get all courses
 GET {{host}}/courses HTTP/1.1
@@ -10,4 +30,17 @@ GET {{host}}/courses HTTP/1.1
 ###
 
 # get a specific course
-GET {{host}}/courses/1 HTTP/1.1
+GET {{host}}/courses/2 HTTP/1.1
+
+###
+
+# add a new course
+POST {{host}}/courses HTTP/1.1
+{{auth}}
+{{json}}
+
+{
+  "title": "New Course",
+  "description": "My course description",
+  "userId": 1
+}
