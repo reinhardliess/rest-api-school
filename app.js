@@ -9,6 +9,14 @@ Reinhard Liess, 2019
 const express = require('express');
 const morgan = require('morgan');
 
+// import models, database
+const db = require('./db')
+const { User, Course } = db.models;
+const { Sequelize } = db;
+const { Op } = db.Sequelize;
+
+// console.log(process.env.RESTAPI_DB);
+
 // variable to enable global error logging
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
 
