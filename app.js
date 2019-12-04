@@ -17,8 +17,8 @@ const morgan = require('morgan');
 
 // import routes
 const indexRouter = require('./routes/index');
-const userRouter = require('./routes/user');
-const courseRouter = require('./routes/course');
+const userRouter = require('./routes/users');
+const courseRouter = require('./routes/courses');
 
 // variable to enable global error logging
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
