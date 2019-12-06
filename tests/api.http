@@ -3,7 +3,8 @@
 # Variables
 @host = http://localhost:5000/api
 @json = Content-Type: application/json
-@auth = Authorization: Basic joe@smith.com joepassword
+# @auth = Authorization: Basic joe@smith.com joepassword
+@auth = Authorization: Basic Sally@jones.com sallypassword
 
 # get info for authenticated user
 GET {{host}}/users HTTP/1.1
@@ -12,14 +13,26 @@ GET {{host}}/users HTTP/1.1
 ###
 
 # create new user
+
 POST {{host}}/users HTTP/1.1
 {{json}}
 
 {
-  "firstName": "Lara",
+  firstName: "Lara",
   "lastName": "Croft",
   "emailAddress": "lara@croftmanor.co.uk",
   "password": "jaffacakes214"
+}
+
+###
+POST {{host}}/users HTTP/1.1
+{{json}}
+
+{
+  "lastName": "Stephen",
+  "firstName": "Beyer",
+  "emailAddress": "stephen@smith.com",
+  "password": "LyTU"
 }
 
 ###
@@ -30,7 +43,7 @@ GET {{host}}/courses HTTP/1.1
 ###
 
 # get a specific course
-GET {{host}}/courses/2 HTTP/1.1
+GET {{host}}/courses/{{$randomInt 1 5}} HTTP/1.1
 
 ###
 
@@ -40,7 +53,31 @@ POST {{host}}/courses HTTP/1.1
 {{json}}
 
 {
-  "title": "New Course",
-  "description": "My course description",
-  "userId": 1
+  "title": "Copying Neural Driver",
+  "description": "Voluptate modi aut. Ex consequatur sequi voluptatem dolor. Mollitia facere laudantium minima consequatur ratione alias animi.",
+  "estimatedTime": "13 hours",
+  "materialsNeeded": "Rustic Granite",
+  "userId": "2"
 }
+
+###
+
+# update a course
+PUT {{host}}/courses/7 HTTP/1.1
+{{auth}}
+{{json}}
+
+{
+  "title": "Copying Neural Driver",
+  "description": "Voluptate modi aut. Ex consequatur sequi voluptatem dolor. Mollitia facere laudantium minima consequatur ratione alias animi.",
+  "estimatedTime": "13 hours",
+  "materialsNeeded": "Old Granite",
+  "userId": "8"
+}
+
+###
+
+# delete a course
+DELETE {{host}}/courses/6 HTTP/1.1
+{{auth}}
+{{json}}
