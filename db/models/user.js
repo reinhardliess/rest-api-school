@@ -14,27 +14,24 @@ module.exports = (sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
-        notEmpty: {
-          msg: 'Please provide a value for firstname'
-        }
+        notNull: true,
+        notEmpty: true
       }
     },
     lastName: {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
-        notEmpty: {
-          msg: 'Please provide a value for lastname'
-        }
+        notNull: true,
+        notEmpty: true
       }
     },
     emailAddress: {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
-        isEmail: {
-          msg: 'Please provide a valid email address'
-        }
+        isEmail: true,
+        notEmpty: true
       },
       set(email) {
         this.setDataValue('emailAddress', email.toLowerCase());
@@ -43,12 +40,25 @@ module.exports = (sequelize) => {
     password: {
       type: Sequelize.STRING,
       allowNull: false,
-      set(password) {
-        const salt = bcrypt.genSaltSync(10);
-        this.setDataValue('password', bcrypt.hashSync(password, salt))
+      validate: {
+        customValidator(value) {
+          const password = value.trim();
+          if (password.length < 10 || password.length > 32) {
+            throw new Error('"Password" must be between 10 and 32 characters long');
+          }
+        }
       }
     }
-
-  }, { sequelize })
+  }, {
+    hooks: {
+      // a hook is needed to hash the password,
+      // because setters are executed before validation
+      beforeCreate(user, options) {
+        const salt = bcrypt.genSaltSync(10);
+        user.password = bcrypt.hashSync(user.password, salt);
+      }
+    },
+    sequelize
+  });
   return User
 }
