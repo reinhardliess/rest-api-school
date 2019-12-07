@@ -18,21 +18,22 @@ POST {{host}}/users HTTP/1.1
 {{json}}
 
 {
-  firstName: "Lara",
+  "firstName": "Lara",
   "lastName": "Croft",
   "emailAddress": "lara@croftmanor.co.uk",
   "password": "jaffacakes214"
 }
 
 ###
+
 POST {{host}}/users HTTP/1.1
 {{json}}
 
 {
-  "lastName": "Stephen",
-  "firstName": "Beyer",
-  "emailAddress": "stephen@smith.com",
-  "password": "LyTU"
+  "firstName": "Kenneth",
+  "lastName": "Schultz",
+  "emailAddress": "Bernie.Brakus62@gmail.com",
+  "password": "0fmOUO6BeRAMQy8"
 }
 
 ###
@@ -43,9 +44,15 @@ GET {{host}}/courses HTTP/1.1
 ###
 
 # get a specific course
-GET {{host}}/courses/{{$randomInt 1 5}} HTTP/1.1
+GET {{host}}/courses/8 HTTP/1.1
 
 ###
+
+# get a specific course (random)
+GET {{host}}/courses/{{$randomInt 1 8}} HTTP/1.1
+
+###
+
 
 # add a new course
 POST {{host}}/courses HTTP/1.1
@@ -53,11 +60,11 @@ POST {{host}}/courses HTTP/1.1
 {{json}}
 
 {
-  "title": "Copying Neural Driver",
-  "description": "Voluptate modi aut. Ex consequatur sequi voluptatem dolor. Mollitia facere laudantium minima consequatur ratione alias animi.",
-  "estimatedTime": "13 hours",
-  "materialsNeeded": "Rustic Granite",
-  "userId": "2"
+  "title": "Quantifying Primary Alarm",
+  "description": "Sed enim omnis qui modi consequuntur. Sed inventore et impedit ea voluptas quasi eum assumenda sit. Modi neque odit provident reprehenderit et. Nam et occaecati aut vitae.",
+  "estimatedTime": "4 hours",
+  "materialsNeeded": "Fantastic Metal",
+  "userId": "5"
 }
 
 ###

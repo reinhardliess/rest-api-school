@@ -20,7 +20,11 @@ const options = {
 // GET - get all courses with user owning the course
 router.get('/', asyncHandler(async (req, res) => {
   const courses = await Course.findAll(options);
-  res.status(200).json({ courses });
+  if (courses) {
+    res.status(200).json({ courses });
+  } else {
+    res.status(404).end();
+  }
 }));
 
 // GET - get course with id with user owning the course
@@ -29,6 +33,8 @@ router.get('/:id', asyncHandler(async (req, res) => {
   const course = await Course.findByPk(id, options);
   if (course) {
     res.status(200).json({ course });
+  } else {
+    res.status(404).end();
   }
 }));
 
@@ -39,7 +45,7 @@ router.post('/', asyncHandler(authenticateUser), asyncHandler(async (req, res) =
     const course = await Course.create(req.body);
     res.location(`/api/courses/${course.id}`);
     // Set the status to 201 Created and end the response.
-    return res.status(201).end();
+    res.status(201).end();
   } catch (error) {
     if (isSeqError(error)) {
       res.status(400).json(validationError(error));
