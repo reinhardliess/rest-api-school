@@ -40,19 +40,11 @@ router.get('/:id', asyncHandler(async (req, res) => {
 
 // POST - add a course
 router.post('/', asyncHandler(authenticateUser), asyncHandler(async (req, res) => {
-  try {
-    // Get the user from the request body.
-    const course = await Course.create(req.body);
-    res.location(`/api/courses/${course.id}`);
-    // Set the status to 201 Created and end the response.
-    res.status(201).end();
-  } catch (error) {
-    if (isSeqError(error)) {
-      res.status(400).json(validationError(error));
-    } else {
-      next(error);
-    }
-  }
+  // Get the user from the request body.
+  const course = await Course.create(req.body);
+  res.location(`/api/courses/${course.id}`);
+  // Set the status to 201 Created and end the response.
+  res.status(201).end();
 }));
 
 // PUT - update a course
@@ -61,26 +53,19 @@ router.put('/:id', asyncHandler(authenticateUser), asyncHandler(async (req, res)
   const { id } = req.params;
   const { emailAddress } = req.currentUser;
 
-  try {
-    const course = await Course.findByPk(id);
-    if (course) {
-      const user = await User.findByPk(course.userId);
-      if (user.emailAddress === emailAddress) {
-        await course.update(req.body);
-        res.status(204).end();
-      } else {
-        res.status(403).end();
-      }
+  const course = await Course.findByPk(id);
+  if (course) {
+    const user = await User.findByPk(course.userId);
+    if (user.emailAddress === emailAddress) {
+      await course.update(req.body);
+      res.status(204).end();
     } else {
-      res.status(404).end();
+      res.status(403).end();
     }
-  } catch (error) {
-    if (isSeqError(error)) {
-      res.status(400).json(validationError(error));
-    } else {
-      next(error);
-    }
+  } else {
+    res.status(404).end();
   }
+
 }));
 
 // DELETE - delete a course
@@ -88,26 +73,19 @@ router.delete('/:id', asyncHandler(authenticateUser), asyncHandler(async (req, r
   const { id } = req.params;
   const { emailAddress } = req.currentUser;
 
-  try {
-    const course = await Course.findByPk(id);
-    if (course) {
-      const user = await User.findByPk(course.userId);
-      if (user.emailAddress === emailAddress) {
-        await course.destroy();
-        res.status(204).end();
-      } else {
-        res.status(403).end();
-      }
+  const course = await Course.findByPk(id);
+  if (course) {
+    const user = await User.findByPk(course.userId);
+    if (user.emailAddress === emailAddress) {
+      await course.destroy();
+      res.status(204).end();
     } else {
-      res.status(404).end();
+      res.status(403).end();
     }
-  } catch (error) {
-    if (isSeqError(error)) {
-      res.status(400).json(validationError(error));
-    } else {
-      next(error);
-    }
+  } else {
+    res.status(404).end();
   }
+
 }));
 
 module.exports = router;
