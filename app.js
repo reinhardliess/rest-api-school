@@ -9,12 +9,6 @@ Reinhard Liess, 2019
 const express = require('express');
 const morgan = require('morgan');
 
-// import models, database
-// const db = require('./db')
-// const { User, Course } = db.models;
-// const { Sequelize } = db;
-// const { Op } = db.Sequelize;
-
 // import routes
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/users');
@@ -49,10 +43,8 @@ app.use((err, req, res, next) => {
   }
 
   res.status(err.status || 500).json({
-    errors: [{
-      message: err.message,
-      type: `Global Error: ${err.type}`
-    }]
+    message: err.message,
+    type: err.constructor.name
   });
 });
 
