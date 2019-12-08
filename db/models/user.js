@@ -40,9 +40,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         customValidator(value) {
+          const PWD_MIN = 8;
           const password = value.trim();
-          if (password.length < 10 || password.length > 32) {
-            throw new Error('"Password" must be between 10 and 32 characters long');
+          if (password.length < PWD_MIN) {
+            throw new Error(`"Password" must be at least ${PWD_MIN} characters long`);
           }
         }
       }
