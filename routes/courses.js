@@ -4,10 +4,11 @@ const express = require('express');
 const router = express.Router();
 
 const db = require('../db');
-const { attrib, sequelize, Sequelize } = db;
+const { attrib, Sequelize } = db;
 const { Course, User } = db.models;
-const { asyncHandler, authenticateUser, validationError, isSeqError } = require('../lib/utils')
+const { asyncHandler, courseHandler, authenticateUser } = require('../lib/utils')
 
+// Query options for GET with included user
 const options = {
   attributes: attrib.course,
   include: [{
@@ -40,74 +41,47 @@ router.get('/:id', asyncHandler(async (req, res) => {
 
 // POST - add a course
 router.post('/', asyncHandler(authenticateUser), asyncHandler(async (req, res) => {
-  try {
-    // Get the user from the request body.
-    const course = await Course.create(req.body);
-    res.location(`/api/courses/${course.id}`);
-    // Set the status to 201 Created and end the response.
-    res.status(201).end();
-  } catch (error) {
-    if (isSeqError(error)) {
-      res.status(400).json(validationError(error));
-    } else {
-      next(error);
-    }
-  }
+  // Get the user from the request body.
+  const course = await Course.create(req.body);
+  res.location(`/api/courses/${course.id}`);
+  // Set the status to 201 Created and end the response.
+  res.status(201).end();
 }));
 
 // PUT - update a course
-// REFACTOR: eliminate dup code in the following 2 routes
-router.put('/:id', asyncHandler(authenticateUser), asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  const { emailAddress } = req.currentUser;
+router.put('/:id', asyncHandler(authenticateUser), asyncHandler(async (req, res, next) => {
 
-  try {
-    const course = await Course.findByPk(id);
-    if (course) {
-      const user = await User.findByPk(course.userId);
-      if (user.emailAddress === emailAddress) {
-        await course.update(req.body);
-        res.status(204).end();
-      } else {
-        res.status(403).end();
+  courseHandler(req, res, next, async (course) => {
+    // Validaton
+    const required = ['title', 'description'];
+    const errors = [];
+
+    for (const field of required) {
+      if (!req.body[field]) {
+        const objErr = {
+          message: `Course.${field} cannot be null`,
+          type: 'notNull Violation',
+          path: `${field}`,
+          value: null
+        }
+        errors.push(objErr);
       }
-    } else {
-      res.status(404).end();
     }
-  } catch (error) {
-    if (isSeqError(error)) {
-      res.status(400).json(validationError(error));
+    if (errors.length) {
+      res.status(400).json({ errors });
+      return false
     } else {
-      next(error);
+      await course.update(req.body);
+      return true
     }
-  }
+  })
 }));
 
 // DELETE - delete a course
-router.delete('/:id', asyncHandler(authenticateUser), asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  const { emailAddress } = req.currentUser;
-
-  try {
-    const course = await Course.findByPk(id);
-    if (course) {
-      const user = await User.findByPk(course.userId);
-      if (user.emailAddress === emailAddress) {
-        await course.destroy();
-        res.status(204).end();
-      } else {
-        res.status(403).end();
-      }
-    } else {
-      res.status(404).end();
-    }
-  } catch (error) {
-    if (isSeqError(error)) {
-      res.status(400).json(validationError(error));
-    } else {
-      next(error);
-    }
-  }
+router.delete('/:id', asyncHandler(authenticateUser), asyncHandler(async (req, res, next) => {
+  courseHandler(req, res, next, async (course) => {
+    await course.destroy();
+  })
 }));
 
 module.exports = router;
