@@ -11,6 +11,30 @@
       "lastName": "Jones",
       "emailAddress": "sally@jones.com",
       "password": "sallypassword"
+    },
+    {
+      "firstName": "Preston",
+      "lastName": "Mueller",
+      "emailAddress": "Brady.Brekke46@yahoo.com",
+      "password": "ttmglJj9vk37KWg"
+    },
+    {
+      "firstName": "Zack",
+      "lastName": "Sipes",
+      "emailAddress": "Ethelyn.Hills@hotmail.com",
+      "password": "G4u9NYjuWQoOMfr"
+    },
+    {
+      "firstName": "Sarah",
+      "lastName": "Daniel",
+      "emailAddress": "Lee_Ratke@gmail.com",
+      "password": "QiXU8fOPsMkAdTV"
+    },
+    {
+      "firstName": "Yvonne",
+      "lastName": "Hills",
+      "emailAddress": "Burley11@hotmail.com",
+      "password": "PflA6AYjFyXdhVI"
     }
   ],
   "courses": [
@@ -32,6 +56,31 @@
       "userId": 2,
       "title": "Learn How to Test Programs",
       "description": "In this course, you'll learn how to test programs."
+    },
+    {
+      "title": "Synthesizing Solid State Interface",
+      "description": "Consequatur illo voluptatem eveniet reiciendis. Ullam veritatis non repellat eum ea omnis est. Velit accusamus quibusdam eaque natus quis quisquam debitis ut nobis.",
+      "estimatedTime": "3 hours",
+      "materialsNeeded": "Gorgeous Rubber",
+      "userId": "6"
+    },
+    {
+      "title": "Navigating Cross-Platform Monitor",
+      "description": "Sed labore ut omnis similique. Hic sed similique fugiat voluptas. Animi quis nam assumenda et. Quidem nihil aut ducimus dolores a. Repellat placeat non eum quia porro numquam. Qui quasi hic aspernatur animi porro velit.",
+      "userId": "3"
+    },
+    {
+      "title": "Backing Up 1080p Protocol",
+      "description": "Aut quae aut assumenda optio nihil veritatis distinctio commodi. Vero commodi qui vel et ullam in ex aperiam. Sit possimus ut perspiciatis et eum atque assumenda consequatur temporibus. Tenetur eum iste voluptatem optio impedit sunt. Voluptatem beatae error accusantium laudantium illum corporis. Maxime beatae est excepturi dolorem quae voluptatem sed.",
+      "materialsNeeded": "Unbranded Plastic",
+      "userId": "4"
+    },
+    {
+      "title": "Compressing Haptic Sensor",
+      "description": "Blanditiis culpa dolor. Ipsam ut repudiandae. Aut distinctio laborum nesciunt. Voluptas quibusdam neque nostrum nostrum voluptas labore quam.",
+      "estimatedTime": "5 hours",
+      "materialsNeeded": "Refined Rubber",
+      "userId": "5"
     }
   ]
 }

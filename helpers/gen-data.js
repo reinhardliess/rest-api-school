@@ -8,7 +8,7 @@ const capString = str => str.replace(/\b[a-z]/g, char => char.toUpperCase());
 // get random integer between 2 integers, inclusive for both
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-const MAX_USERID = 5;
+const MAX_USERID = 6;
 let obj;
 
 if (params[0] === 'user') {

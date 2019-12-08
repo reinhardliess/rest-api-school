@@ -3,8 +3,8 @@
 # Variables
 @host = http://localhost:5000/api
 @json = Content-Type: application/json
-# @auth = Authorization: Basic joe@smith.com joepassword
-@auth = Authorization: Basic Sally@jones.com sallypassword
+@auth = Authorization: Basic joe@smith.com joepassword
+# @auth = Authorization: Basic Sally@jones.com sallypassword
 
 # get info for authenticated user
 GET {{host}}/users HTTP/1.1
@@ -44,7 +44,7 @@ GET {{host}}/courses HTTP/1.1
 ###
 
 # get a specific course
-GET {{host}}/courses/8 HTTP/1.1
+GET {{host}}/courses/3 HTTP/1.1
 
 ###
 
@@ -52,7 +52,6 @@ GET {{host}}/courses/8 HTTP/1.1
 GET {{host}}/courses/{{$randomInt 1 8}} HTTP/1.1
 
 ###
-
 
 # add a new course
 POST {{host}}/courses HTTP/1.1
@@ -63,28 +62,27 @@ POST {{host}}/courses HTTP/1.1
   "title": "Quantifying Primary Alarm",
   "description": "Sed enim omnis qui modi consequuntur. Sed inventore et impedit ea voluptas quasi eum assumenda sit. Modi neque odit provident reprehenderit et. Nam et occaecati aut vitae.",
   "estimatedTime": "4 hours",
-  "materialsNeeded": "Fantastic Metal",
+  "materialsNeeded": "Used Metal",
   "userId": "5"
 }
 
 ###
 
 # update a course
-PUT {{host}}/courses/7 HTTP/1.1
+PUT {{host}}/courses/8 HTTP/1.1
 {{auth}}
 {{json}}
 
 {
   "title": "Copying Neural Driver",
   "description": "Voluptate modi aut. Ex consequatur sequi voluptatem dolor. Mollitia facere laudantium minima consequatur ratione alias animi.",
-  "estimatedTime": "13 hours",
-  "materialsNeeded": "Old Granite",
-  "userId": "8"
+  "estimatedTime": "11 hours",
+  "materialsNeeded": "Cast Iron"
 }
 
 ###
 
 # delete a course
-DELETE {{host}}/courses/6 HTTP/1.1
+DELETE {{host}}/courses/7 HTTP/1.1
 {{auth}}
 {{json}}
