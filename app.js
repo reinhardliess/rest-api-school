@@ -9,6 +9,9 @@ Reinhard Liess, 2019
 const express = require('express');
 const morgan = require('morgan');
 
+// database
+const { sequelize } = require('./db');
+
 // import routes
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/users');
@@ -37,7 +40,7 @@ app.use((req, res) => {
 });
 
 // setup a global error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   if (enableGlobalErrorLogging) {
     console.error(`Global error handler: ${JSON.stringify(err.stack)}`);
   }
@@ -47,6 +50,21 @@ app.use((err, req, res, next) => {
     type: err.constructor.name
   });
 });
+
+// Terminate app if db connection can't be established
+// NB: sequelize.authenticate is unreliable with sqlite
+//     If db doesn't exist a zero byte file is created and the default query returns true (ok)
+sequelize.query('select * from users')
+  .then(() => {
+    console.log(`Database connection to ${sequelize.options.storage} has been established successfully.`);
+  })
+  .catch(err => {
+    console.error(`Unable to connect to the database ${sequelize.options.storage}`);
+    if (enableGlobalErrorLogging) {
+      console.error(err)
+    }
+    process.exit(1);
+  });
 
 // set our port
 app.set('port', process.env.PORT || 5000);
