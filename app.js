@@ -40,14 +40,18 @@ app.use((req, res) => {
 });
 
 // setup a global error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   if (enableGlobalErrorLogging) {
     console.error(`Global error handler: ${JSON.stringify(err.stack)}`);
   }
 
   res.status(err.status || 500).json({
-    message: err.message,
-    type: err.constructor.name
+    errors: [
+      {
+        message: err.message,
+        type: err.constructor.name
+      }
+    ]
   });
 });
 
