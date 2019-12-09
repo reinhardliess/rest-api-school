@@ -6,7 +6,8 @@ const router = express.Router();
 const db = require('../db');
 const { attrib, Sequelize } = db;
 const { Course, User } = db.models;
-const { asyncHandler, courseHandler, authenticateUser } = require('../lib/utils')
+const { asyncHandler, courseHandler,
+  authenticateUser, validateCourses } = require('../lib/utils');
 
 // Query options for GET with included user
 const options = {
@@ -53,20 +54,7 @@ router.put('/:id', asyncHandler(authenticateUser), asyncHandler(async (req, res,
 
   courseHandler(req, res, next, async (course) => {
     // Validaton
-    const required = ['title', 'description'];
-    const errors = [];
-
-    for (const field of required) {
-      if (!req.body[field]) {
-        const objErr = {
-          message: `Course.${field} cannot be null`,
-          type: 'notNull Violation',
-          path: `${field}`,
-          value: null
-        }
-        errors.push(objErr);
-      }
-    }
+    const errors = validateCourses(req);
     if (errors.length) {
       res.status(400).json({ errors });
       return false
@@ -81,7 +69,10 @@ router.put('/:id', asyncHandler(authenticateUser), asyncHandler(async (req, res,
 router.delete('/:id', asyncHandler(authenticateUser), asyncHandler(async (req, res, next) => {
   courseHandler(req, res, next, async (course) => {
     await course.destroy();
+    return true;
   })
 }));
 
 module.exports = router;
+
+

@@ -53,7 +53,7 @@ app.use((err, req, res) => {
 
 // Terminate app if db connection can't be established
 // NB: sequelize.authenticate is unreliable with sqlite
-//     If db doesn't exist a zero byte file is created and the default query returns true (ok)
+// If db doesn't exist a zero byte file is created and the default query returns true=ok
 sequelize.query('select * from users')
   .then(() => {
     console.log(`Database connection to ${sequelize.options.storage} has been established successfully.`);

@@ -43,7 +43,7 @@ module.exports = (sequelize) => {
           const PWD_MIN = 8;
           const password = value.trim();
           if (password.length < PWD_MIN) {
-            throw new Error(`"Password" must be at least ${PWD_MIN} characters long`);
+            throw new Error(`User.password must be at least ${PWD_MIN} characters long`);
           }
         }
       }
