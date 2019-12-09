@@ -1,31 +1,117 @@
-# JavaScript Techdegree Project #9: REST API
+# REST API for a school database
 
-A live version of this project can be found [here](). Please note that the app is in hibernation mode and may take a couple of seconds to load.  
+In this project for the Treehouse techdegree, I created a REST API using Express. The API provides a way for users to administer a school database containing information about courses: users can interact with the database by retrieving a list of courses, as well as adding, updating and deleting courses in the database.
+
+In addition, users are required to create an account and log-in to make changes to the database.
+
+## Technologies Used
+
+* Node.js
+* Express
+* Sequelize ORM
+* SQL
+* REST API design
+* JavaScript
 
 ## Installation
 
 * Download or clone from Github
-* run `npm install`
-* run `npm start` to start the server. The website can then be accessed locally by pointing the web browser to `localhost:5000`
+* Run `npm install`
+* Run `npm run seed`
+* Set the environment variable `RESTAPI_DB` if necessary (see below)
+* Run the app
 
-## Project Requirements
+## Available npm scripts
 
-* 
-* 
-* 
-* 
-* 
+### `npm run seed`
 
-## Exceeds Grade Project Requirements
+* Seeds the SQLITE database
 
-* 
-* 
+### `npm start`
 
-## Some Additional remarks
+* Runs app
 
-* 
-* 
-* 
-* 
-* 
-* 
+### `npm run start_local`
+
+* Runs app via nodemon
+
+### `npm run debug`
+
+* Runs app via nodemon in inspect mode for debugging in Visual Studio Code or Google Chrome
+
+The environment variable `RESTAPI_DB` must be set to the SQLITE database `./fsjstd-restapi.db`. This is already configured in `nodemon.json` for development purposes.  
+
+## REST API Endpoints
+
+### General remarks
+
+* The PUT /api/courses/:id and DELETE /api/courses/:id routes return a 403 status code if the current user doesn't own the requested course
+* The following properties are filtered out: `password`, `createdAt`, `updatedAt`
+* If a course or a route isn't found a 404 status is returned and no content
+
+### Authentication
+
+* The following routes are authenticated
+  * GET /api/users
+  * POST /api/courses
+  * PUT /api/courses/:id
+  * DELETE /api/courses/:id
+
+### User
+
+* `GET /api/users 200` - Returns the currently authenticated user
+* `POST /api/users 201` - Creates a user, sets the Location header to "/", and returns no content
+
+### Course
+
+* `GET /api/courses 200` - Returns a list of courses (including the user that owns each course)
+* `GET /api/courses/:id 200` - Returns the course (including the user that owns the course) for the provided course ID
+* `POST /api/courses 201` - Creates a course, sets the Location header to the URI for the course, and returns no content
+* `PUT /api/courses/:id 204` - Updates a course and returns no content
+* `DELETE /api/courses/:id 204` - Deletes a course and returns no content
+
+### Tests
+
+* The `./tests/RESTAPI.postman_collection.json` file is a collection of Postman requests that can be used to test the REST API.
+* The `./tests/api.http` file serves the same purpose and can be used with the Visual Studio Code [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) extension. It uses variables, so it can also be used to test a deployed version.
+* The [gen-data.js tool](./helpers/README.md) in `./helpers` can be used to generate test data.
+
+### Error Messages
+
+* Error messages are always returned in an array of error objects
+
+## Validation Errors
+
+* Validation and database errors return the properties: message, type, path, value
+
+Example:
+
+```json
+{
+  "errors": [
+    {
+      "message": "User.password cannot be null",
+      "type": "notNull Violation",
+      "path": "password",
+      "value": null
+    }
+  ]
+}
+```
+
+## Other Errors
+
+* Other errors return the properties: message, type
+
+Example:
+
+```json
+{
+  "errors": [
+    {
+      "message": "Unexpected token f in JSON at position 5",
+      "type": "SyntaxError"
+    }
+  ]
+}
+```
