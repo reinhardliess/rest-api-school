@@ -43,12 +43,6 @@ The environment variable `RESTAPI_DB` must be set to the SQLITE database `./fsjs
 
 ## REST API Endpoints
 
-### General remarks
-
-* The PUT /api/courses/:id and DELETE /api/courses/:id routes return a 403 status code if the current user doesn't own the requested course
-* The following properties are filtered out: `password`, `createdAt`, `updatedAt`
-* If a course or a route isn't found a 404 status is returned and no content
-
 ### Authentication
 
 * The following routes are authenticated
@@ -69,20 +63,26 @@ The environment variable `RESTAPI_DB` must be set to the SQLITE database `./fsjs
 * `POST /api/courses 201` - Creates a course, sets the Location header to the URI for the course, and returns no content
 * `PUT /api/courses/:id 204` - Updates a course and returns no content
 * `DELETE /api/courses/:id 204` - Deletes a course and returns no content
+* The `PUT /api/courses/:id` and `DELETE /api/courses/:id` routes return a 403 status code if the current user doesn't own the requested course
+
+### General remarks
+
+* The following properties are filtered out: `password`, `createdAt`, `updatedAt`
+* If a course or a route isn't found a 404 status is returned and no content
 
 ### Tests
 
-* The `./tests/RESTAPI.postman_collection.json` file is a collection of Postman requests that can be used to test the REST API.
-* The `./tests/api.http` file serves the same purpose and can be used with the Visual Studio Code [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) extension. It uses variables, so it can also be used to test a deployed version.
+* The [RESTAPI.postman_collection.json](./tests/RESTAPI.postman_collection.json) file is a collection of Postman requests that can be used to test the REST API.
+* The [api.http](./tests/api.http) file serves the same purpose and can be used with the Visual Studio Code [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) extension. It uses variables, so it can also be used to test a deployed version.
 * The [gen-data.js tool](./helpers/README.md) in `./helpers` can be used to generate test data.
 
-### Error Messages
+## Error Messages
 
 * Error messages are always returned in an array of error objects
 
-## Validation Errors
+### Validation Errors
 
-* Validation and database errors return the properties: message, type, path, value
+* Validation and database errors return the properties: `message`, `type`, `path`, `value`
 
 Example:
 
@@ -99,9 +99,9 @@ Example:
 }
 ```
 
-## Other Errors
+### Other Errors
 
-* Other errors return the properties: message, type
+* Other errors return the properties: `message`, `type`
 
 Example:
 
