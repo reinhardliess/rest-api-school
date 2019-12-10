@@ -3,7 +3,9 @@
   "ignore": [
     ".git",
     "./node_modules/**",
-    "./local-resources/**"
+    "./local-resources/**",
+    "./helpers/**",
+    "./tests/**"
   ],
   "verbose": true,
   "env": {
