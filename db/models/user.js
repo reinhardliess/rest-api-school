@@ -51,7 +51,7 @@ module.exports = (sequelize) => {
   }, {
     hooks: {
       // a hook is needed to hash the password,
-      // because setters are executed before validation
+      // because setters are executed before validation (which makes sense)
       beforeCreate(user, options) {
         const salt = bcrypt.genSaltSync(10);
         user.password = bcrypt.hashSync(user.password, salt);
