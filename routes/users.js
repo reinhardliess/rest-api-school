@@ -17,10 +17,10 @@ router.post('/', asyncHandler(async (req, res) => {
 
   // Get the user from the request body.
   await User.create(req.body);
-  res.location('/');
-  // Set the status to 201 Created and end the response.
-  return res.status(201).end();
-
+  res
+    .status(201)
+    .location('/')
+    .end();
 }));
 
 module.exports = router;

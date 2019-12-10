@@ -44,9 +44,10 @@ router.get('/:id', asyncHandler(async (req, res) => {
 router.post('/', asyncHandler(authenticateUser), asyncHandler(async (req, res) => {
   // Get the user from the request body.
   const course = await Course.create(req.body);
-  res.location(`/api/courses/${course.id}`);
-  // Set the status to 201 Created and end the response.
-  res.status(201).end();
+  res
+    .status(201)
+    .location(`/api/courses/${course.id}`)
+    .end();
 }));
 
 // PUT - update a course
