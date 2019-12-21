@@ -111,7 +111,7 @@ class Database {
 
     this.log('Hashing the user passwords...');
 
-    const users = await this.hashUserPasswords(this.users);
+    const users = await Database.hashUserPasswords(this.users);
 
     this.log('Creating the user records...');
 
