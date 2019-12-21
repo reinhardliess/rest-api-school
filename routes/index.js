@@ -1,6 +1,5 @@
-'use strict';
-
 const express = require('express');
+
 const router = express.Router();
 
 // setup a friendly greeting for the root route

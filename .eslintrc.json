@@ -1,0 +1,28 @@
+{
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+    "no-console": 0,
+    "no-debugger": 0,
+    "no-await-in-loop": 0,
+    "no-unused-vars": [
+      1,
+      {
+        "ignoreSiblings": true,
+        "argsIgnorePattern": "res|next|^err"
+      }
+    ],
+    "no-restricted-syntax": [
+      2,
+      "ForInStatement",
+      "LabeledStatement",
+      "WithStatement"
+    ]
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:prettier/recommended"
+  ]
+}

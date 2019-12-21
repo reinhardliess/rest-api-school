@@ -12,13 +12,13 @@ const db = {
   models: {},
   attrib: {
     user: ['id', 'firstName', 'lastName', 'emailAddress'],
-    course: ['id', 'title', 'description', 'estimatedTime', 'materialsNeeded']
-  }
-}
+    course: ['id', 'title', 'description', 'estimatedTime', 'materialsNeeded'],
+  },
+};
 
 // import all models
-const User = require('./models/user')(sequelize)
-const Course = require('./models/course')(sequelize)
+const User = require('./models/user')(sequelize);
+const Course = require('./models/course')(sequelize);
 
 // define associations
 User.hasMany(Course);

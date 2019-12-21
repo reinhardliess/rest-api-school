@@ -1,9 +1,8 @@
-'use strict';
-/******************************************
+/** ****************************************
 Treehouse Techdegree:
 FSJS project #9 - REST API w/ Express
 Reinhard Liess, 2019
-******************************************/
+***************************************** */
 
 // load modules
 const express = require('express');
@@ -18,7 +17,8 @@ const userRouter = require('./routes/users');
 const courseRouter = require('./routes/courses');
 
 // variable to enable global error logging
-const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
+const enableGlobalErrorLogging =
+  process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
 
 // create the Express app
 const app = express();
@@ -49,23 +49,28 @@ app.use((err, req, res, next) => {
     errors: [
       {
         message: err.message,
-        type: err.constructor.name
-      }
-    ]
+        type: err.constructor.name,
+      },
+    ],
   });
 });
 
 // Terminate app if db connection can't be established
 // NB: sequelize.authenticate seems to be unreliable with sqlite
 // If db doesn't exist a zero byte file is created and the default query returns true=ok
-sequelize.query('select * from users')
+sequelize
+  .query('select * from users')
   .then(() => {
-    console.log(`Database connection to ${sequelize.options.storage} has been established successfully.`);
+    console.log(
+      `Database connection to ${sequelize.options.storage} has been established successfully.`
+    );
   })
-  .catch(err => {
-    console.error(`Unable to connect to the database ${sequelize.options.storage}`);
+  .catch((err) => {
+    console.error(
+      `Unable to connect to the database ${sequelize.options.storage}`
+    );
     if (enableGlobalErrorLogging) {
-      console.error(err)
+      console.error(err);
     }
     process.exit(1);
   });
