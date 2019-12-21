@@ -7,6 +7,7 @@ Reinhard Liess, 2019
 // load modules
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 
 // database
 const { sequelize } = require('./db');
@@ -25,6 +26,9 @@ const app = express();
 
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
+
+// Enable All CORS Requests
+app.use(cors());
 
 // Setup request body JSON parsing.
 app.use(express.json());
