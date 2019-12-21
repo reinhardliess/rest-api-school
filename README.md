@@ -18,8 +18,7 @@ In addition, users are required to create an account and log-in to make changes 
 - Download or clone from Github
 - Run `npm install`
 - Run `npm run seed`
-- Set the environment variable `RESTAPI_DB` if necessary (see below)
-- Run the app
+- Run `npm run start_local` to run the app
 
 ## Available npm scripts
 
@@ -29,7 +28,7 @@ In addition, users are required to create an account and log-in to make changes 
 
 ### `npm start`
 
-- Runs app
+- Runs app (The environment variable `RESTAPI_DB` must be set - see below)
 
 ### `npm run start_local`
 
@@ -39,7 +38,7 @@ In addition, users are required to create an account and log-in to make changes 
 
 - Runs app via nodemon in inspect mode for debugging in Visual Studio Code or Google Chrome
 
-The environment variable `RESTAPI_DB` must be set to the SQLITE database `./fsjstd-restapi.db`. This is already configured in `nodemon.json` for development purposes.  
+The environment variable `RESTAPI_DB` must be set to the SQLITE database `./fsjstd-restapi.db`. This is already configured in `nodemon.json` for nodemon setups.  
 
 ## REST API Endpoints
 
