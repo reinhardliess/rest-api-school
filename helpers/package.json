@@ -1,0 +1,16 @@
+{
+  "name": "helpers",
+  "version": "1.0.0",
+  "description": "Generates data for Treehouse FSJS project #9, REST API.   It uses [faker](https://github.com/Marak/Faker.js#readme) to create either a course or a user.",
+  "main": "gen-data.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Reinhard Liess <reinhard.liess@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/faker": "^4.1.8",
+    "faker": "^4.1.0"
+  }
+}
