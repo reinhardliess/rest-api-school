@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 const faker = require('faker');
 
 const params = process.argv.slice(2);
