@@ -15,22 +15,25 @@ module.exports = (sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          notEmpty: true,
+          notEmpty: { msg: 'Please enter your first name' },
         },
       },
       lastName: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          notEmpty: true,
+          notEmpty: {
+            msg: 'Please enter your last name',
+          },
         },
       },
       emailAddress: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          isEmail: true,
-          notEmpty: true,
+          isEmail: {
+            msg: 'Please provide a valid email address',
+          },
         },
         set(email) {
           this.setDataValue('emailAddress', email.toLowerCase());
@@ -45,7 +48,7 @@ module.exports = (sequelize) => {
             const password = value.trim();
             if (password.length < PWD_MIN) {
               throw new Error(
-                `User.password must be at least ${PWD_MIN} characters long`
+                `Password must be at least ${PWD_MIN} characters long`
               );
             }
           },
