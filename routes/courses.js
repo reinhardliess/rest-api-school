@@ -43,7 +43,7 @@ router.get(
     const { id } = req.params;
     const course = await Course.findByPk(id, options);
     if (course) {
-      res.status(200).json({ course });
+      res.status(200).json({ courses: [course] });
     } else {
       res.status(404).end();
     }
