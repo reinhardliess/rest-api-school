@@ -44,7 +44,7 @@ GET {{host}}/courses HTTP/1.1
 ###
 
 # get a specific course
-GET {{host}}/courses/3 HTTP/1.1
+GET {{host}}/courses/1 HTTP/1.1
 
 ###
 
@@ -63,7 +63,7 @@ POST {{host}}/courses HTTP/1.1
   "description": "Sed enim omnis qui modi consequuntur. Sed inventore et impedit ea voluptas quasi eum assumenda sit. Modi neque odit provident reprehenderit et. Nam et occaecati aut vitae.",
   "estimatedTime": "4 hours",
   "materialsNeeded": "Used Metal",
-  "userId": "5"
+  "userId": "1"
 }
 
 ###
@@ -83,6 +83,6 @@ PUT {{host}}/courses/8 HTTP/1.1
 ###
 
 # delete a course
-DELETE {{host}}/courses/7 HTTP/1.1
+DELETE {{host}}/courses/1 HTTP/1.1
 {{auth}}
 {{json}}
