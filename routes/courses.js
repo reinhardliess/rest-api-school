@@ -70,12 +70,6 @@ router.put(
   asyncHandler(authenticateUser),
   asyncHandler(async (req, res, next) => {
     courseHandler(req, res, next, async (course) => {
-      // Validaton
-      const errors = validateCourses(req);
-      if (errors.length) {
-        res.status(400).json({ errors });
-        return false;
-      }
       await course.update(req.body);
       return true;
     });
