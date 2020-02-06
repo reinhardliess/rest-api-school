@@ -4,8 +4,7 @@
   "description": "A REST API with Express to administer a school database of courses and users",
   "main": "app.js",
   "scripts": {
-    "start": "node ./app.js",
-    "start_local": "nodemon",
+    "start": "nodemon",
     "debug": "nodemon --inspect",
     "seed": "cross-env DB_ENABLE_LOGGING=true node './seed'",
     "lint": "eslint .",
