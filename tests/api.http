@@ -1,7 +1,8 @@
 # A collection of requests to test the REST API (to use with Visual Studio Code Rest Client extension)
 
 # Variables
-@host = http://localhost:5000/api
+# @host = http://localhost:5000/api
+@host = https://rliess-course-api.herokuapp.com/api
 @json = Content-Type: application/json
 @auth = Authorization: Basic joe@smith.com joepassword
 # @auth = Authorization: Basic Sally@jones.com sallypassword
